@@ -1,0 +1,106 @@
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top:100px;
+    font-family: 'VT323', monospace;
+    color: #abb78a;
+    background-color:rgb(46, 45, 45);
+}
+#logo{
+    position: absolute;
+    width:150px;
+    height: 150px;
+    /* margin: 160px 120px; */
+    /* margin:auto; */
+    border: 5px solid black;
+}
+#instruction-text{
+    color: black;
+    /* margin: auto; */
+    /* padding: 5px; */
+    width: 340px;
+    text-align: center;
+    margin-top: 300px;
+    /* margin: 60px 30px; */
+    /* margin:  */
+    position: absolute;
+}
+#game-border-1{
+    border: 10px solid  #595f43 ;
+    /* border: 10px solid  #7C0A02; */
+    border-radius: 10px;
+    height: 460px;
+    box-shadow: inset 0 0 0 10px #595f43    ;
+    /* box-shadow: inset 0 0 0 10px #7C0A02    ; */
+}
+#game-border-2{
+    border: 10px solid  #abb78a;
+    /* border: 10px solid  #F08080; */
+    height: 440px;
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 10px #abb78a;
+    /* box-shadow: inset 0 0 0 10px #F08080; */
+}
+#game-border-3{
+    border: 20px solid  #8b966c;
+    /* border: 20px solid  #D2122E; */
+    height: 400px;
+    border-radius: 10px;
+}
+#game-board{
+    display: grid;
+    /* align-items: center; */
+    grid-template-columns: repeat(20,20px);
+    grid-template-rows: repeat(20,20px);
+    /* justify-content: center; */
+    /* flex-direction: column; */
+    background-color: #abb78a;
+    /* background-color: #F08080; */
+    /* flex-wrap: wrap; */
+}
+.snake{
+    background-color: #414141;
+    border: 1px dotted #5a5a5a
+}
+.food{
+    background-color: #dedede;
+    /* background-color: #FBCEB1; */
+    border: 5px solid #999;
+    /* border: 5px solid #FF0800; */
+}
+.scores{
+    display: flex;
+    justify-content: space-between;
+}
+#highScore{
+    /* align-self: flex-end; */
+    color:antiquewhite;
+}
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 30px;
+}
+.button{
+    /* display: block; */
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+    margin-left: 10px;
+    /* position: absolute; */
+}
+#button1{
+    /* margin-left:400px; */
+    background-color: green;
+    border: 5px solid azure;
+}
+#button2{
+    background-color: red;
+}
+#button3{
+    background-color: yellow;
+}
+#button4{
+    background-color: blue;
+}
