@@ -1,15 +1,24 @@
 //define html elements
 //capture the board
+//game borders
 const gameBorder1=document.getElementById('game-border-1');
 const gameBorder2=document.getElementById('game-border-2');
 const gameBorder3=document.getElementById('game-border-3');
+//buttons
 const button1=document.getElementById('button1');
 const button2=document.getElementById('button2');
 const button3=document.getElementById('button3');
 const button4=document.getElementById('button4');
+
+
+//pause button
+const pause=document.getElementById('pause');
+
 const board=document.getElementById('game-board');
 const logo=document.getElementById('logo');
 const instructionText=document.getElementById('instruction-text');
+
+//scores 
 let score=document.getElementById('score');
 let highScore=document.getElementById('highScore');
 
@@ -45,18 +54,6 @@ function drawSnake(){
         }
     );
 }
-function createGameElement(tag,className){
-    const element=document.createElement(tag);
-    element.className=className;
-    return element;
-}
-
-//set position of snake or food
-function setPosition(element,position){
-    element.style.gridColumn=position.x;
-    element.style.gridRow=position.y;
-}
-
 //draw food function 
 function drawFood(){
     if(gameStarted){
@@ -83,10 +80,23 @@ function drawFood(){
         board.appendChild(foodElement);
     }
 }
+//creating game element
+function createGameElement(tag,className){
+    const element=document.createElement(tag);
+    element.className=className;
+    return element;
+}
+
+//set position of snake or food
+function setPosition(element,position){
+    element.style.gridColumn=position.x;
+    element.style.gridRow=position.y;
+}
+
 // draw();
 
 
-//moving the snake
+//Moving the snake
 function move(){
     //shallow copy of our original object
     //     // Spread Method
@@ -137,45 +147,8 @@ function move(){
         snake.pop();
     }
 }
-function startGame(){
-    gameStarted=true;
-    instructionText.style.display='none';
-    logo.style.display='none';
-    gameInterval=
-        setInterval(
-            ()=>{
-                move();
-                checkCollision();
-                draw();
-            },
-            gameSpeedDelay
-        );
-}
-//event handler argument in the event listener
-function handleKeyPressEvent(event){
-        if((!gameStarted&&event.key===' ')||(!gameStarted&&event.code==='Space')){
-            startGame();
-        }
-        else{
-            switch (event.key) {
-                case 'ArrowUp':
-                    direction="up";
-                    break;  
-                case 'ArrowDown':
-                    direction="down";
-                    break;
-                case 'ArrowRight':
-                    direction="right";
-                    break;
-                case 'ArrowLeft':
-                    direction="left";
-                    break;
-            
-            }
-        }
-        //preventing the default behaviour of the keys 
-        event.preventDefault();
-    }
+
+//checking the collision with snake body or walls
 function checkCollision(){
     const head=snake[0];
     //collision with walls
@@ -190,6 +163,7 @@ function checkCollision(){
         }
     }
 }
+//increasing speed function 
 function increaseSpeed(){
     if(gameSpeedDelay>150){
         gameSpeedDelay-=5;
@@ -205,18 +179,7 @@ function increaseSpeed(){
     }
 
 }
-function resetGame(){
-    updateHighScore();
-    stopGame();
-    snake=[{x:10,y:10}];
-    food=generateFood();
-    direction='right';  
-    gameSpeedDelay=200;
-    updateScore();
-
-    // gameStarted=false;
-}
-
+//updating the scores
 function updateScore(){
     const currentScore=snake.length-1;
     score.textContent=currentScore.toString().padStart(3,'0');
@@ -228,14 +191,72 @@ function updateHighScore(){
         highScore.textContent=highScore2.toString().padStart(3,'0');
     }
 }
-document.addEventListener('keydown',handleKeyPressEvent);
+
+//starting the game 
+function startGame(){
+    gameStarted=true;
+    instructionText.style.display='none';
+    logo.style.display='none';
+    gameInterval=
+        setInterval(
+            ()=>{
+                move();
+                checkCollision();
+                draw();
+            },
+            gameSpeedDelay
+        );
+}
+
+//reseting the game
+function resetGame(){
+    updateHighScore();
+    stopGame();
+    snake=[{x:10,y:10}];
+    food=generateFood();
+    direction='right';  
+    gameSpeedDelay=200;
+    updateScore();
+
+    // gameStarted=false;
+}
+//stopping the game 
 function stopGame(){
+    //clears the movement of the snake 
     clearInterval(gameInterval);
     gameStarted=false;
     instructionText.style.display='block';
     logo.style.display='block';
 }
+//event handler argument in the event listener
+function handleKeyPressEvent(event){
+    if((!gameStarted&&event.key===' ')||(!gameStarted&&event.code==='Space')){
+        startGame();
+    }
+    else{
+        switch (event.key) {
+            case 'ArrowUp':
+                direction="up";
+                break;  
+            case 'ArrowDown':
+                direction="down";
+                break;
+            case 'ArrowRight':
+                direction="right";
+                break;
+            case 'ArrowLeft':
+                direction="left";
+                break;
+        
+        }
+    }
+    //preventing the default behaviour of the keys 
+    event.preventDefault();
+}
+document.addEventListener('keydown',handleKeyPressEvent);
 // const foodelem=document.querySelector('.food');
+
+//buttons behaviour 
 button1.addEventListener("click",()=>{
     gameBorder1.style.borderColor="#595f43";
     gameBorder1.style.boxShadow="inset 0 0 0 10px #595f43";
@@ -301,5 +322,27 @@ button4.addEventListener("click",()=>{
     button3.style.border='none';
     button4.style.border="5px solid azure";
 });
+const pauseText=["&#x23f5","&#x23f8"];
+let index1=0;
+pause.addEventListener("click",()=>{
+    if(index1==0){
+        clearInterval(gameInterval);
+        pause.innerHTML=pauseText[1];
+        index1=1;
+    }
+    else if(index1==1){
+        gameInterval=
+        setInterval(
+            ()=>{
+                move();
+                checkCollision();
+                draw();
+            },
+            gameSpeedDelay
+        );
+        pause.innerHTML=pauseText[0];
+        index1=0;
+    }
+})
 
 // startGame();
