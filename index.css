@@ -79,8 +79,8 @@ body{
 }
 .buttons{
     display: flex;
-    justify-content: flex-end;
-    margin-bottom: 30px;
+    justify-content:flex-end;
+    margin-bottom: 10px;
 }
 .button{
     /* display: block; */
@@ -88,7 +88,29 @@ body{
     height: 30px;
     width: 30px;
     margin-left: 10px;
+    align-self:flex-end;
     /* position: absolute; */
+}
+#pause{
+    font-size: 60px;
+    margin-bottom: 456px;
+    color:white;
+    /* margin-right: 210px; */
+    position: absolute;
+    /* margin-bottom: 20px; */
+    /* margin-right: 400px; */
+    /* margin-right: 500px; */
+    /* align-self:flex-start; */
+    /* margin-right: 10px; */
+    /* position: absolute; */
+    /* margin-right: 254px;
+    font-size: 50px;
+    /* padding:0px; */
+    /* color:black;    
+    background-color: rgb(46, 45, 45);
+    border:none; */ 
+    /* height: 10px; */
+    /* margin-bottom: 80px; */
 }
 #button1{
     /* margin-left:400px; */
