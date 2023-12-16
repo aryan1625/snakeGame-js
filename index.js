@@ -325,12 +325,14 @@ button4.addEventListener("click",()=>{
 const pauseText=["&#x23f5","&#x23f8"];
 let index1=0;
 pause.addEventListener("click",()=>{
-    if(index1==0){
+    if(gameStarted&&index1==0){
         clearInterval(gameInterval);
+        gameStarted=false;
         pause.innerHTML=pauseText[1];
         index1=1;
     }
     else if(index1==1){
+        gameStarted=true;
         gameInterval=
         setInterval(
             ()=>{
